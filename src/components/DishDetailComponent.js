@@ -29,8 +29,7 @@ class DishDetail extends Component {
                             {eachItem.comment}
                         </ul>
                         <ul>-- {eachItem.author} ,
-                                 {new Date(eachItem.date).toLocaleDateString('en-US',
-                                 {year: 'numeric', month: 'long', day: 'numeric' })}
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachItem.date)))}
                         </ul>
                     </div>
                 )
