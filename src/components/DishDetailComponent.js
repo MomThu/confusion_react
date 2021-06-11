@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Card, CardBody, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label, Button, ListGroup, ListGroupItem, Row, Col } from 'reactstrap';
+    Form, FormGroup, Input, Label, Button, ListGroup, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -129,7 +131,25 @@ class CommentForm extends Component {
     }
 
     const DishDetail = (props) => {
-        if (props.dishes != null) {
+        if (props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            )
+        }
+        else if (props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            )
+        }
+        else if (props.dishes != null) {
             return (
                 <div className="container">
                     <div className="row">
